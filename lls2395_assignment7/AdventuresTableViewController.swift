@@ -83,8 +83,17 @@ class AdventuresTableViewController: UITableViewController {
    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         //is it completely deleting?
         if editingStyle == .Delete{
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let managedContext = appDelegate.managedObjectContext
+            managedContext.deleteObject(adventurers[indexPath.row] as NSManagedObject)
             adventurers.removeAtIndex(indexPath.row)
-            self.tableView.reloadData()
+            
+            do {
+                try managedContext.save()
+                self.tableView.reloadData()
+            } catch {
+                print("error : \(error)")
+            }
         }
     }
     

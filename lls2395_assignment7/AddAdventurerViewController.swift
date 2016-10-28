@@ -95,10 +95,13 @@ class AddAdventurerViewController: UIViewController, UITextFieldDelegate,UIColle
             let adventurer = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
             
             //saves info to CoreData.
+            let randomHP = Int(arc4random_uniform(61) + 50)
+            var randomAttack = Double(arc4random())/Double(UInt32.max)*3 + 2
+            randomAttack = Double(floor(100*randomAttack)/100)
             adventurer.setValue(nameField.text, forKey: "name")
             adventurer.setValue(classField.text, forKey: "classType")
-            adventurer.setValue(3.55, forKey: "attack") //change to random with a function
-            adventurer.setValue(105, forKey: "hp") //change to random with a function
+            adventurer.setValue(randomAttack, forKey: "attack") //change to random with a function
+            adventurer.setValue(randomHP, forKey: "hp") //change to random with a function
             adventurer.setValue(1, forKey: "level")
             //case if no image is selected? random one?
             adventurer.setValue(indexImage, forKey: "image")

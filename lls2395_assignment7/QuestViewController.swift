@@ -28,8 +28,12 @@ class QuestViewController: UIViewController {
     var tempHP: String?
     var tempLvl: String?
     var tempImg: UIImage?
+    var questLog: String = ""
     
+    var advenTimer = NSTimer()
+    var enemyTimer = NSTimer()
     
+    //var counterm = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,10 +45,11 @@ class QuestViewController: UIViewController {
         hpMax.text = tempHP
         level.text = tempLvl
         questImage.image = tempImg
+        log.text = "Oh boy! Here I go questing again!"
         
         
-        
-        
+        advenTimer = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: #selector(heroAtt), userInfo: nil, repeats: true)
+        enemyTimer = NSTimer.scheduledTimerWithTimeInterval(0.7, target: self, selector: #selector(heroAtt), userInfo: nil, repeats: true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -53,6 +58,19 @@ class QuestViewController: UIViewController {
     }
     @IBAction func endQuest(sender: UIButton) {
         self.dismissViewControllerAnimated(true, completion: {})
+    }
+    
+    func heroAtt() {
+        let attack = Double(tempAtt!)
+        let currentHP = Double(hpMax.text!)
+        let damage = (attack! * 4) - currentHP!
+        
+        hpMax.text = "\(damage)"
+        
+    }
+    
+    func enemtAtt(){
+        
     }
     
     
