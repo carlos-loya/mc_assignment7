@@ -61,7 +61,7 @@ class AdventuresTableViewController: UITableViewController {
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext =  appDelegate.managedObjectContext
-        	
+        
         let fetchRequest = NSFetchRequest(entityName: "Adventurer")
         
         do{
@@ -88,29 +88,34 @@ class AdventuresTableViewController: UITableViewController {
         }
     }
     
+    
     //MARK: - Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "questSegue"{
             
-            let contentViewController = segue.destinationViewController as! QuestViewController
+            let contentViewController = segue.destinationViewController as? QuestViewController
             
             if let selectedCell = sender as? AdventurerViewCell {
                 
-                let indexPath = tableView.indexPathForCell(selectedCell)!
-                
-                
-                contentViewController.name.text = adventurers[indexPath.row].valueForKey("name") as? String
-                contentViewController.type.text = adventurers[indexPath.row].valueForKey("classType") as? String
-                contentViewController.attack.text = String(adventurers[indexPath.row].valueForKey("attack")!)
-                contentViewController.hpMax.text = String(adventurers[indexPath.row].valueForKey("hp")!)
-                contentViewController.level.text = String(adventurers[indexPath.row].valueForKey("level")!)
-                contentViewController.questImage.image = UIImage(named: String(adventurers[indexPath.row].valueForKey("image")!))
-                
+                contentViewController?.tempAtt = selectedCell.attackScore.text
+                contentViewController?.tempLvl = selectedCell.levelLabel.text
+                contentViewController?.tempHP = selectedCell.hpScore.text
+                contentViewController?.tempType = selectedCell.type.text
+                contentViewController?.tempName = selectedCell.nameLabel.text
+                contentViewController?.tempImg = selectedCell.adventurerImage.image
             }
             
         }
-            
+        
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        _ = tableView.indexPathForSelectedRow!
+        
+        if let _ = tableView.cellForRowAtIndexPath(indexPath){
+            self.performSegueWithIdentifier("questSegue", sender: self)
+        }
     }
 
     
