@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class QuestViewController: UIViewController {
     
@@ -29,11 +30,12 @@ class QuestViewController: UIViewController {
     var tempLvl: String?
     var tempImg: UIImage?
     var questLog: String = ""
+    var experience: Int = 0
+    
+    let e1 = Enemy()
     
     var advenTimer = NSTimer()
     var enemyTimer = NSTimer()
-    
-    //var counterm = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,13 +45,16 @@ class QuestViewController: UIViewController {
         type.text = tempType
         attack.text = tempAtt
         hpMax.text = tempHP
+        hpCurrent.text = tempHP
         level.text = tempLvl
         questImage.image = tempImg
-        log.text = "Oh boy! Here I go questing again!"
+        questLog += "Oh boy! Here I go questing again!\n"
+        log.text = questLog
         
         
-        advenTimer = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: #selector(heroAtt), userInfo: nil, repeats: true)
-        enemyTimer = NSTimer.scheduledTimerWithTimeInterval(0.7, target: self, selector: #selector(heroAtt), userInfo: nil, repeats: true)
+        
+        advenTimer = NSTimer.scheduledTimerWithTimeInterval(1.4, target: self, selector: #selector(QuestViewController.heroAtt(_:)), userInfo: e1, repeats: true)
+        enemyTimer = NSTimer.scheduledTimerWithTimeInterval(3.5, target: self, selector: #selector(QuestViewController.eAtt(_:)), userInfo: e1, repeats: true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -60,18 +65,73 @@ class QuestViewController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: {})
     }
     
-    func heroAtt() {
-        let attack = Double(tempAtt!)
-        let currentHP = Double(hpMax.text!)
-        let damage = (attack! * 4) - currentHP!
+    // called for when the hero attacks
+    func heroAtt(timer:NSTimer){
         
-        hpMax.text = "\(damage)"
+        // damage calulation
+        let e1 = timer.userInfo as! Enemy
+        let heroAtt = Double(tempAtt!)! * Double(arc4random_uniform(3)) + 20
+        let remainingHP = e1.enemyHP - heroAtt
+        
+        
+        questLog += "\(name.text!) attacks for \(heroAtt) damage!\n"
+        
+        // if the enemy is still alive
+        if remainingHP > 0 {
+            questLog += "The monster is waiting and has \(remainingHP) remaining...\n"
+            e1.enemyHP = remainingHP
+        }
+            
+        // if not
+        else {
+            questLog += "The monster is defeated!\n"
+            questLog += "A new enemy appears!\n"
+            e1.enemyHP += 60
+            
+            experience += (100 + Int(arc4random_uniform(100)))
+            
+            if experience > 400 {
+                // DING
+                // gratz
+                
+                experience = 0
+                var tempLevel = Int(level.text!)!
+                tempLevel += 1
+                level.text = "\(tempLevel)"
+                
+                
+            }
+            
+        }
+        
+        
+        log.text = questLog
         
     }
     
-    func enemtAtt(){
+    // enemy attack method called by the enemy timer
+    func eAtt(timer:NSTimer){
+        let e1 = timer.userInfo as! Enemy
+    
+        
+        questLog += "The Monster attacks for \(e1.enemyAtt) damage!\n"
+        
+        let hpLeft = Double(hpCurrent.text!)! - e1.enemyAtt
+        
+        if hpLeft > 0 {
+            hpCurrent.text = "\(hpLeft)"
+        }
+        else{
+            hpCurrent.text = "0"
+            questLog += "Oh no! You died!"
+            timer.invalidate()
+        }
+        
+        
+        
         
     }
+
     
     
 }

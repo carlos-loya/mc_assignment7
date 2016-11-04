@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD819A261DCC4726008C1F31 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD819A251DCC4726008C1F31 /* Enemy.swift */; };
 		B35BF7F51DBA894200369F3A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35BF7F41DBA894200369F3A /* AppDelegate.swift */; };
 		B35BF7FA1DBA894200369F3A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B35BF7F81DBA894200369F3A /* Main.storyboard */; };
 		B35BF7FD1DBA894200369F3A /* lls2395_assignment7.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B35BF7FB1DBA894200369F3A /* lls2395_assignment7.xcdatamodeld */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AD819A251DCC4726008C1F31 /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		B35BF7F11DBA894200369F3A /* cal3388_lls2395_assignment7.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cal3388_lls2395_assignment7.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B35BF7F41DBA894200369F3A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B35BF7F91DBA894200369F3A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 				B35BF8001DBA894200369F3A /* LaunchScreen.storyboard */,
 				B35BF8031DBA894200369F3A /* Info.plist */,
 				B35BF7FB1DBA894200369F3A /* lls2395_assignment7.xcdatamodeld */,
+				AD819A251DCC4726008C1F31 /* Enemy.swift */,
 			);
 			path = lls2395_assignment7;
 			sourceTree = "<group>";
@@ -154,6 +157,7 @@
 				B3F8BFC81DBFC946008C1D37 /* QuestViewController.swift in Sources */,
 				B3E92A541DBC34CB00B761BF /* AddAdventurerViewController.swift in Sources */,
 				B35BF7FD1DBA894200369F3A /* lls2395_assignment7.xcdatamodeld in Sources */,
+				AD819A261DCC4726008C1F31 /* Enemy.swift in Sources */,
 				B3E92A561DBC34CB00B761BF /* AdventurerViewCell.swift in Sources */,
 				B3F8BFC61DBF3CE6008C1D37 /* ImagesCollectionViewCell.swift in Sources */,
 				B35BF7F51DBA894200369F3A /* AppDelegate.swift in Sources */,
